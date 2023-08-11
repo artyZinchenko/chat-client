@@ -44,7 +44,6 @@ const Messages = ({ socket }: Props) => {
     };
 
     useEffect(() => {
-        console.log('scroll');
         scrollToBottom();
     }, [socket, messages]);
 

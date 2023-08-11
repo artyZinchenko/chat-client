@@ -5,9 +5,8 @@ export const useParseInput = (value: string) => {
     const [_tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
-        console.log('effect');
         const { message, tags } = parseValue(value);
-        console.log(message);
+
         setMessage(message);
         setTags(tags);
     }, [value]);
