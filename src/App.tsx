@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { io } from 'socket.io-client';
+import Chat from './Chat/Chat';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const socket = io('https://chat-server-qvs6.onrender.com');
+    socket.connect();
+    socket.on('error', (error) => {
+        console.error('Socket error:', error);
+    });
+
+    return (
+        <div className='container'>
+            <Chat socket={socket} />
+        </div>
+    );
 }
 
 export default App;

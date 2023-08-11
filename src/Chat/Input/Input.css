@@ -1,0 +1,15 @@
+.input {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 80%;
+    padding-block: 1em;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+@media (max-width: 767px) {
+    .input {
+        flex-direction: column;
+    }
+}

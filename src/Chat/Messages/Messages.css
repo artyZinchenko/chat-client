@@ -1,0 +1,22 @@
+.messages-container {
+    width: 80%;
+    padding: 1em;
+    background-color: azure;
+    height: 75%;
+    overflow-y: auto;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+
+@media (max-width: 767px) {
+    .messages-container {
+        width: 80%;
+        padding-inline: none;
+    }
+}

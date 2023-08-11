@@ -1,0 +1,12 @@
+.message {
+    padding-block: 0.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: 100%;
+}
+
+.message:hover {
+    background-color: aliceblue;
+}
