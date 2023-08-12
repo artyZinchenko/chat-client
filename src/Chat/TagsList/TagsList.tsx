@@ -23,8 +23,10 @@ const TagsList = ({ socket }: Props) => {
 
     return (
         <div>
+            <Typography variant='h6' sx={{ paddingTop: '1em' }}>
+                My tags:{' '}
+            </Typography>
             <SearchTags />
-            <Typography variant='h6'>My tags: </Typography>
             <div className='tags-list'>
                 {selectedTags.map((tag) => {
                     return <Tag tag={tag} key={tag} />;
