@@ -17,7 +17,7 @@ export const useParseInput = (value: string) => {
     };
 };
 
-const parseValue = (value: string) => {
+export const parseValue = (value: string) => {
     let message = [];
     let tags = [];
     const arr = value.split(/[\n ]+/);

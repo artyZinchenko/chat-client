@@ -9,8 +9,8 @@ import {
 } from 'react';
 
 interface TagsContextValue {
-    selectedTags: Tag[];
-    setSelectedTags: Dispatch<SetStateAction<Tag[]>>;
+    selectedTags: string[];
+    setSelectedTags: Dispatch<SetStateAction<string[]>>;
     storedTags: Tag[];
     setStoredTags: Dispatch<SetStateAction<Tag[]>>;
 }
@@ -29,7 +29,7 @@ interface Props {
 }
 
 export const TagsContextProvider = ({ children }: Props) => {
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [storedTags, setStoredTags] = useState<Tag[]>([]);
 
     return (

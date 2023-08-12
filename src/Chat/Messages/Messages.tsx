@@ -18,7 +18,7 @@ const Messages = ({ socket }: Props) => {
         selectedTags.length > 0
             ? messages.filter((message) => {
                   return message.tags.some((tag) =>
-                      selectedTags.find((selected) => selected.text === tag)
+                      selectedTags.find((selected) => selected === tag)
                   );
               })
             : messages;

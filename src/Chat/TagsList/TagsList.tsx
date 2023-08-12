@@ -4,12 +4,14 @@ import Tag from './Tag/Tag';
 import { Typography } from '@mui/material';
 import './TagsList.css';
 import { useTagsContext } from '../../contexts/TagContext';
+import SearchTags from './SearchTags/SearchTags';
 
 interface Props {
     socket: Socket;
 }
+
 const TagsList = ({ socket }: Props) => {
-    const { storedTags, setStoredTags } = useTagsContext();
+    const { selectedTags, setStoredTags } = useTagsContext();
 
     useEffect(() => {
         const handler = (data: Tag[]) => setStoredTags(data);
@@ -21,10 +23,11 @@ const TagsList = ({ socket }: Props) => {
 
     return (
         <div>
+            <SearchTags />
             <Typography variant='h6'>My tags: </Typography>
             <div className='tags-list'>
-                {storedTags.map((tag) => {
-                    return <Tag tag={tag} key={tag.id} />;
+                {selectedTags.map((tag) => {
+                    return <Tag tag={tag} key={tag} />;
                 })}
             </div>
         </div>

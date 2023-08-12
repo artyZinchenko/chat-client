@@ -1,20 +1,26 @@
-import { Button } from '@mui/material';
-import './Input.css';
-import { useState } from 'react';
-import { useTagsContext } from '../../contexts/TagContext';
-import { useParseInput } from '../hooks/useParseInput';
 import { InlineAutocomplete } from '@primer/react/drafts';
 import { ThemeProvider, Textarea } from '@primer/react';
+import { useState } from 'react';
+import { useTagsContext } from '../../../contexts/TagContext';
+import { parseValue } from '../../hooks/useParseInput';
 
-interface Props {
-    sendMessage: (arg0: string, arg1: string[]) => void;
-}
-
-const InputText = ({ sendMessage }: Props) => {
+const SearchTags = () => {
     const [inputText, setInputText] = useState('');
-    const { storedTags } = useTagsContext();
+    const { storedTags, selectedTags, setSelectedTags } = useTagsContext();
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const { message, tags } = useParseInput(inputText);
+
+    const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const line = e.target.value;
+        setInputText(line);
+        if (line.endsWith('\n') || line.endsWith(' ')) {
+            const { tags } = parseValue(line);
+            setSelectedTags([
+                ...selectedTags,
+                ...tags.filter((t) => !selectedTags.includes(t)),
+            ]);
+            setInputText('');
+        }
+    };
 
     return (
         <ThemeProvider>
@@ -33,25 +39,17 @@ const InputText = ({ sendMessage }: Props) => {
                 >
                     <Textarea
                         value={inputText}
-                        onChange={(e) => setInputText(e.target.value)}
+                        onChange={handleInput}
                         block={true}
-                        cols={100}
+                        cols={50}
+                        rows={1}
                         style={{ fontSize: '1.3em', resize: 'none' }}
+                        placeholder='#add-tags'
                     />
                 </InlineAutocomplete>
-                <Button
-                    variant='outlined'
-                    disabled={message.length > 0 ? false : true}
-                    onClick={() => {
-                        setInputText('');
-                        sendMessage(message, tags);
-                    }}
-                >
-                    Send
-                </Button>
             </div>
         </ThemeProvider>
     );
 };
 
-export default InputText;
+export default SearchTags;
